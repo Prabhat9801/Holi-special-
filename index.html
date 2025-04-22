@@ -271,7 +271,7 @@
     <script>
         // Configuration - Customize these variables
         const anniversaryDate = new Date('1990-04-23'); // Replace with your parents' anniversary date (YYYY-MM-DD)
-        const totalPhotos = 8; // Number of photos to display
+        const totalPhotos = 3; // Number of photos to display - CORRECTED: Changed from 8 to match actual photos array length
         
         // Photo information - Replace with your actual photos and captions
         const photos = [
@@ -290,7 +290,6 @@
                 src: "img3.jpg", 
                 caption: "That amazing trip to the beach where Dad got sunburned but still had the best time." 
             }
-          
         ];
 
         // Wait for everything to load
@@ -537,4 +536,30 @@
                     setTimeout(() => {
                         messageContainer.style.opacity = '1';
                     }, 3000);
-    
+                }
+            }
+            
+            // Update anniversary counter
+            function updateAnniversaryCounter() {
+                const now = new Date();
+                const yearsDiff = now.getFullYear() - anniversaryDate.getFullYear();
+                const monthsDiff = now.getMonth() - anniversaryDate.getMonth();
+                const daysDiff = now.getDate() - anniversaryDate.getDate();
+                
+                // Adjust for negative values
+                let years = yearsDiff;
+                let months = monthsDiff;
+                let days = daysDiff;
+                
+                if (daysDiff < 0) {
+                    months--;
+                    // Get days in previous month
+                    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                    days += prevMonth.getDate();
+                }
+                
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+   
